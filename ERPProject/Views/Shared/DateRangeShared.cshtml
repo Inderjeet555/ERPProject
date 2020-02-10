@@ -1,0 +1,40 @@
+﻿@model ERPProject.Models.DateRange
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @Id = "RangeDateForm" }))
+{
+    <div class="DateRange">
+        <span>From:</span> @Html.TextBoxFor(model => model.FromDate, new  { @class = "mask" })
+        <span>To:</span> @Html.TextBoxFor(model => model.ToDate, new { @class = "mask" })
+        </div>
+}
+
+<script type="text/javascript">
+    var fromdate = @Html.Raw(Json.Encode(Model.FromDate))
+      topdate = @Html.Raw(Json.Encode(Model.ToDate))
+        $("#FromDate").kendoDatePicker({
+            value: fromdate,
+            format: "dd/MM/yyyy"
+
+        });
+    $("#ToDate").kendoDatePicker({
+        value: topdate,
+        format: "dd/MM/yyyy"
+
+    });
+
+    $(".mask").each(function () {
+        $(this).mask("99/99/9999", { placeholder: " " });
+    });
+
+    function getDateRange() {
+        var fromDt = $("#FromDate").data('kendoDatePicker').value();
+        var toDt = $("#ToDate").data('kendoDatePicker').value();
+        var startDt = $("#FromDate").val();
+        var endDt = $("#ToDate").val();
+
+        if ((new Date(fromDt).getTime() < new Date(toDt).getTime()))
+            return { pfromDate: startDt, ptoDate: endDt };
+        else
+            return { pfromDate: endDt, ptoDate: startDt };
+    }
+</script>

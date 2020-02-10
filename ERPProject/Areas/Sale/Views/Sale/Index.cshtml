@@ -1,0 +1,35 @@
+﻿@using ERPProject.Models
+@{   
+   Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "E Commerce Sale Bill";
+}
+
+<div class="innerMain" id="ItemGridForm"></div>
+
+    <div class="innerMain">
+    <div class="pageHeader">
+        <div class="pageTitle">Sale Bill</div>
+        <div class="pagebtn">
+            <a id="createButton" class="k-button" href="#a">ADD</a>
+            <a id="editButton" class="k-button" href="#a">EDIT</a>
+            <a id="deleteButton" class="k-button" href="#a">DELETE</a>
+            <a id="returnButton" class="k-button" href="#a">RETURN</a>
+            <a id="cancelButton" class="k-button" href="#a">CANCEL</a>
+            <a id="printButton" class="k-button" href="#a">PRINT</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="column">
+        @{Html.RenderPartial("~/Views/Shared/DateRangeShared.cshtml", (DateRange)ViewBag.DateRange); }
+    </div>
+        <div class="clear"></div>  
+        <br />      
+        <div id="SaleDetail" data-bind="source: saleGridSource"></div>
+</div>
+<script src="@Url.Content("~/Scripts/Views/ECSaleBillIndex.js")" type="text/javascript"></script>
+
+
+

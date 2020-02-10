@@ -1,0 +1,140 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model ERPProject.ViewModels.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.blueopal.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/jquery.qtip.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/qTip/jquery.qtip.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Kendo/2019.1.115/kendo.web.min.js")" type="text/javascript"></script>
+<section id="loginForm">
+    @using (Html.BeginForm("/Login", null, new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        <div style="width:100%;height:100%;">
+            <fieldset style="width:320px;height:250px;margin-top:230px;border-radius:25px;">
+                <h1>Login</h1>
+                <div class="loginlbl">
+                    @Html.LabelFor(m => m.UserName)
+                </div>
+              
+                <div class="editor-field loginfield">
+                    <span class="k-textbox">
+                        @Html.TextBoxFor(m => m.UserName)
+                    </span><br />
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="clear"></div>
+                <div class="loginlbl">
+                    @Html.LabelFor(m => m.Password)
+                </div>
+                <div class="editor-field loginfield">
+                    <span class="k-textbox">
+                        @Html.PasswordFor(m => m.Password)
+                    </span><br />
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+               
+                <div class="clear"></div>
+                <div style="float:right;padding-right:60px;">
+                    <input type="submit" value="Log in" class="k-button" /> 
+                </div>
+                <div>
+                    @Html.ValidationSummary(true)
+                </div>
+                <div id="ValidationSummary">
+                </div>
+            </fieldset>
+        </div>
+    }
+</section>
+
+
+<style>
+    .loginlbl {
+        font-weight: bold;        
+        padding-left: 10px;
+        text-align: left;
+        width: 25%;
+        display: inline-block;
+        padding-bottom: 0.5em;
+        float: left;
+             
+        
+        
+    }
+
+    .k-input {
+        height: 1.6em !important;
+    }
+
+    .loginfield {
+        float: right;
+       
+    }
+
+    body {
+        background-color: #DAECF4;
+    }
+
+    div fieldset {
+        background: none repeat scroll 0 0 #F7F7F7;
+        border: 1px solid rgba(147, 184, 189, 0.8);
+        border-radius: 5px 5px 5px 5px;
+        margin-top: 15%;
+        margin-left: 30%;
+        position: absolute;
+    }
+
+    h1 {
+        text-align: center;
+       
+        
+    }
+
+        h1:after {
+            background: -moz-linear-gradient(left center, rgba(147, 184, 189, 0) 0%, rgba(147, 184, 189, 0.8) 20%, #93B8BD 53%, rgba(147, 184, 189, 0.8) 79%, rgba(147, 184, 189, 0) 100%) repeat scroll 0 0 transparent;
+            content: " ";
+            display: block;
+            height: 3px;
+            margin-top: 10px;
+            width: 100%;
+            color: #DAECF4;
+            font-family: 'FranchiseRegular','Arial Narrow',Arial,sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            
+        }
+
+    .k-textbox input {
+        height: 18px;
+    }
+</style>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

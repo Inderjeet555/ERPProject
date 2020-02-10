@@ -1,0 +1,261 @@
+﻿@using ERPProject.Areas.Sale.ViewModels
+@using ERPProject.Extensions;
+@model ERPProject.Areas.Sale.ViewModels.SaleBillHeaderViewModel
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Sale Bill";
+}
+<h2>Sale Bill</h2>
+    <div class="innerMain">
+        <div class="pageHeader">
+            <div id="pTitle" class="pageTitle"></div>
+            <div class="clear"></div>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "saleform" }))
+            {
+                @Html.ValidationSummary(true)
+                <div class="column">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Date)
+                    </div>
+                    <div class="editor-field">
+                        @Html.KendoInputFor(model => model.Date, new
+                        {
+                        @class = "INmask",
+                        @data_role = "datepicker",
+                        @data_bind = "value:sale.Date , disabled:detailEnabled"
+                   })
+                        @Html.ValidationMessageFor(model => model.Date)
+                    </div>
+
+                    <div class="editor-label">
+                        <label for="InvoiceNo"> Invoice No </label>
+                    </div>
+                    <div class="editor-field">
+                        <span class="k-textbox">
+                            @Html.KendoInputFor(model => model.InvoiceNo, new
+                            {
+                               @data_role = "textbox",
+                               @data_bind = " value:sale.InvoiceNo",
+                               @disabled = "disabled"
+                            })
+                        </span>
+                        @Html.ValidationMessageFor(model => model.InvoiceNo)
+                    </div>
+                </div>
+                <div class=" column">
+                    <div class="editor-label">
+                        <label for="PartyAccountId"> Party Name </label>
+                    </div>                    
+                        <div class="editor-field">
+                            <div id="ERPCombo">
+                             <input id="accountCombo" style="width:100%" placeholder="Select..."/>
+                                @Html.ValidationMessageFor(model => model.PartyAccountId)
+                            </div>
+                    </div>                                       
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SaleOrderNo)
+                    </div>
+                    <div class="editor-field">
+                        <span class="k-textbox">
+                            @Html.KendoInputFor(model => model.SaleOrderNo, new { @data_role = "textbox", @data_bind = "value:sale.SaleOrderNo", @placeholder = "Enter" })
+                        </span>
+                        @Html.ValidationMessageFor(model => model.SaleOrderNo)
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="editor-label">
+                        <label for="GodownId"> Godown </label>
+                    </div>
+                    <div class="editor-field">
+                        @Html.KendoInputFor(model => model.GodownId, new
+                        {
+                         @style = "width:220px;",
+                         @data_role = "combobox",
+                         @placeholder = "Select...",
+                         @data_bind = "source:GodowndataSource, comboboxValue: sale.GodownId, comboboxText: sale.GodownName",
+                         @data_value_field = "ID",
+                         @data_text_field = "Value",
+                         @data_auto_bind = "false"
+                   })
+                        @Html.ValidationMessageFor(model => model.GodownId)
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="clear"></div>
+                <div class="clear"></div>
+
+                <div id="saleDetailGrid" data-bind="source:detailsDataSource"></div>
+                <div class="clear"></div>
+                <div id="VoucherGrid" data-bind="source: detailVoucherGrid" style="width:550px"></div>
+                
+                <div class="clear"></div>
+                <div class="blocks">
+                    <div class="column">
+                        <div class="editor-label">
+                            <label for="FreightAmount"> Freight </label>
+                        </div>
+                        <div class="editor-field">
+                            @Html.KendoInputFor(model => model.FreightAmount, new { style = "width:200px;", @data_role = "numerictextbox", @data_min = "0", @data_bind = "value:sale.FreightAmount" })
+                            @Html.ValidationMessageFor(model => model.FreightAmount)
+                        </div>
+                    </div>
+                </div>
+                <div class="blocks">
+                    <div class="column">
+                        <div class="editor-label">
+                            <label for="Taxamount"> Tax Amount</label>
+                        </div>
+                        <div class="editor-field">
+                            @Html.KendoInputFor(model => model.Taxamount, new { style = "width:200px;", @data_role = "numerictextbox", @data_min = "0", @data_bind = "value:sale.Taxamount" })
+                            @Html.ValidationMessageFor(model => model.Taxamount)
+                        </div>
+                    </div>
+                </div>
+                <div class="blocks">
+                    <div class="column">
+                        <div class="editor-label">
+                            <label for="TotalAmount"> Total Amount</label>
+                        </div>
+                        <div class="editor-field">
+                            @Html.KendoInputFor(model => model.TotalAmount, new { style = "width:200px;", @data_role = "numerictextbox",@disabled = "disabled", @data_min = "0", @data_bind = "value:sale.TotalAmount" })
+                            @Html.ValidationMessageFor(model => model.TotalAmount)
+                        </div>
+
+                    </div>
+                </div>
+                <div class="blocks">
+                    <div class="column">
+                        <div class="editor-label">
+                            <label for="Discount"> Discount</label>
+                        </div>
+                        <div class="editor-field">
+                            @Html.KendoInputFor(model => model.DiscountAmount, new { style = "width:200px;", @data_role = "numerictextbox", @data_min = "0", @data_bind = "value:sale.DiscountAmount" })
+                            @Html.ValidationMessageFor(model => model.DiscountAmount)
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="pInput">
+                    <input type="button" value="Save" id="saveSaleClick" class="k-button" data-bind="click:save" />
+                </div>
+                <input type="button" value="Preview Voucher" id="PreViewVoucherClick" class="k-button" onclick="PreviewVoucher()" />
+            }
+
+        </div>
+        </div>
+    @Html.Partial("SaleBillDetails", new SaleBillDetailViewModel())
+    @*@Html.Partial("~/Areas/Sale/Views/AccountMaster/CreateAccount.cshtml", new AccountsViewModel())*@
+   <script type="text/javascript">                 
+           var saledata = @Html.Raw(Json.Encode(Model));
+           saledata.Date = kendo.parseDate(saledata.Date, "dd/MM/yyyy");
+           console.log(saledata);         
+      </script>
+    <script src="@Url.Content("~/Scripts/Sale/SaleBillCreate.js")" type="text/javascript"></script> 
+    <style>
+         #divCtr {
+        width: 100%;
+    }
+
+        #divCtr .divSundry {
+            width: 50%;
+            float: left;
+        }
+
+        #divCtr .sundrysub {
+            width: 45%;
+            float: left;
+            padding-left: 15px;
+            padding-right: 5px;
+        }
+
+    #sundryGrid .k-grid-content {
+        height: 80px;
+    }
+
+    #purchaseDetailGrid {
+        margin-bottom: 15px;
+    }
+
+    .blocks {
+        width: 1200px;
+        margin-top: 30px;
+
+    }
+
+    .Positions {
+        width: 400px;
+        float: right;
+    }
+
+    .editor-labels {
+        width: 120px;
+        display: inline-block;
+        padding-bottom: 0.5em;
+    }
+
+    .editor-fields {
+        float: right;
+        display: inline-block;
+        padding-bottom: 0.5em;
+        width: 100px;
+    }
+
+    #pageContents {
+        position: absolute;
+        height: 91.5%;
+        width: 100%;
+        top: 50px;
+    }
+
+    #PreShipmentInvoiceNo-list {
+        width: 405px !important;
+    }
+
+    .dropdown-header {
+        font-size: 1em;
+    }
+
+        .dropdown-header > span {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            text-align: left;
+            display: inline-block;
+            border-style: solid;
+            border-width: 0 0 1px 1px;
+            padding: .3em .6em;
+        }
+
+            .dropdown-header > span:first-child {
+                border-left-width: 0;
+            }
+
+    .col1 {
+        width: 100px;
+    }
+
+
+    .col2 {
+        width: 100px;
+    }
+
+    .col3 {
+        width: 196px;
+    } 
+    
+    .pInput{        
+        text-align:center;  
+    }
+
+    #saveSaleClick{
+        position:absolute;
+        
+    }
+    </style>
+
+
+
+

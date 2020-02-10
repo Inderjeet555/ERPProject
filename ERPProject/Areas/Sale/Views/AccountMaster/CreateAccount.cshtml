@@ -1,0 +1,152 @@
+﻿@using ERPProject.Extensions;
+@using ERPProject.Areas.Sale.ViewModels;
+@model ERPProject.Areas.Sale.ViewModels.AccountsViewModel
+
+@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    string layout = "";
+    if (controller != "Sale")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = layout;
+    }
+
+}
+
+<div id="accountform" style="width:1700px">
+   @*<script id="accountTemplate" type="text/x-kendo-template">*@
+    <form id="AccountDetailForm" method="post">
+        <fieldset class="k-block">
+            <legend>Account Details</legend>
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="AccountName"> AccountName </label>
+                </div>
+                <div class="editor-field">
+                    <span class="k-textbox" id="AccountName">
+                        @Html.KendoInputFor(model => model.AccountName, new
+                   {
+                       @data_role = "textbox",
+                       @data_bind = "value:account.AccountName",
+
+                   })
+                    </span>
+                    @Html.ValidationMessageFor(model => model.AccountName)
+                </div>
+            </div>
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="PAN"> PAN </label>
+                </div>
+                <div class="editor-field">
+                    <span class="k-textbox">
+                        @Html.KendoInputFor(model => model.PAN, new
+                   {
+                       @data_role = "textbox",
+                       @data_bind = "value:account.PAN"
+
+                   })
+                    </span>
+                    @Html.ValidationMessageFor(model => model.PAN)
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="GSTNo"> GST No </label>
+                </div>
+                <div class="editor-field">
+                    <span class="k-textbox">
+                        @Html.KendoInputFor(model => model.GSTNo, new
+                   {
+                       @data_role = "textbox",
+                       @data_bind = "value:account.GSTNo"
+                   })
+                    </span>
+                    @Html.ValidationMessageFor(model => model.GSTNo)
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="Address"> Address </label>
+                </div>
+                <div class="editor-field">
+                    <span class="k-textbox">
+                        @Html.KendoInputFor(model => model.Address, new
+                   {
+                       @data_role = "textbox",
+                       @data_bind = "value:account.Address"
+                   })
+                    </span>
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div>
+                <div class="pInput">
+                    @*<a class="k-button k-button-icontext" id="btnSave" tabindex="22" data-bind="click: saveDetail"><span class="k-icon k-update"></span>Update</a>*@
+                    <input type="button" value="save" id="btnSaveaccount" tabindex="22" class="k-button submitbtn" data-bind="click:NewSaveAccounDetail" />
+
+                    @*<a class="k-button k-button-icontext" id="btnCancel" tabindex="23" data-bind="click: cancelDetail"><span class="k-icon k-cancel"></span>Cancel</a>*@
+                </div>
+            </div>
+        </fieldset>
+    </form>
+      @*</script>*@
+</div>
+<script type="text/javascript">
+
+    var accountdata = @Html.Raw(Json.Encode(Model));
+    //saledata.Date = kendo.parseDate(accountdata.Date, "dd/MM/yyyy");   
+</script>
+
+<script src="@Url.Content("~/Scripts/Views/AccountMaster.js")" type="text/javascript"></script>
+<style>
+    .editor-labels {
+        width: 120px;
+        display: inline-block;
+        padding-bottom: 0.5em;
+        margin-left: 250px;
+    }
+    .k-textbox{
+        width: 250px;
+    }
+    #AccountName{
+        width:350px;
+    }
+
+   @@media screen and (min-width: 1400px){
+        .k-block{
+        width:1350px;
+    }
+   }
+     @@media screen and (min-width: 1366px){
+        .k-block{
+        width:1350px;
+    }
+   }
+     @@media screen and (min-width: 1900px){
+        .k-block{
+        width:1900px;
+    }
+   }   
+
+    .pInput {
+    text-align: center;
+}
+
+.btnSaveaccount {
+    position: absolute;
+    margin:auto;
+    display:block;
+    top: 50%;
+}
+</style>
+

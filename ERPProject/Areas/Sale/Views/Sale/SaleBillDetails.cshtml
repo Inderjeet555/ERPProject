@@ -1,0 +1,240 @@
+﻿@using ERPProject.Extensions;
+@using ERPProject.Areas.Sale.ViewModels;
+@model ERPProject.Areas.Sale.ViewModels.SaleBillDetailViewModel
+<div style="width:1700px">
+    <script id="createTemplate" type="text/x-kendo-template">
+        <form id="saleDetailForm" method="post">
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="ItemId"> Item </label>
+                </div>
+                    <div class="editor-field">
+                        @Html.KendoInputFor(model => model.ItemId, new {
+                           @style = "width:210px;",
+                           @data_role = "combobox",
+                           @placeholder = "Select...",
+                           @data_bind = "source:ItemDataSource, comboboxValue: detail.ItemId, comboboxText: detail.ItemName",
+                           @data_value_field = "ID",
+                           @data_text_field= "Value",
+                           @data_auto_bind = "false",
+                          // @noDataTemplate = ""
+
+                   })
+                        @Html.ValidationMessageFor(model => model.ItemId)
+                    </div>                
+            </div>            
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="Description"> Description </label>
+                </div>
+                    <div class="editor-field">
+                       <span class="k-textbox">
+                            @Html.KendoInputFor(model => model.Description, new
+                   {                     
+                       @data_role = "textbox",                       
+                       @data_bind = "value:detail.Description"
+                   })</span>                   
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>             
+            </div>
+
+            <div class="clear"></div>
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="Bags"> Bags </label>
+                </div>
+                <div class="editor-field">                    
+                        @Html.KendoInputFor(model => model.Bags, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_min = "0",
+                       @data_bind = "value:detail.Bags, events: {change:CalculateQty}"
+                   })                    
+                    @Html.ValidationMessageFor(model => model.Bags)
+                </div>
+            </div>   
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="PackingSize">Packing Size</label>
+                </div>
+                <div class="editor-field">
+                    @Html.KendoInputFor(model => model.PackingSizeId, new
+                   {
+                       @id = "PackingCombo",
+                       @style = "width:150px;",
+                       @data_role = "combobox",
+                       @placeholder = "Select...",
+                       @data_bind = "source:PackingDataSource, comboboxValue: detail.PackingSizeId, comboboxText: detail.PackingSize, events: {change: CalculateQTy}",
+                       @data_value_field = "ID",
+                       @data_text_field = "Value",
+                       @data_auto_bind = "false"                                            
+                   })                    
+                    @Html.ValidationMessageFor(model => model.PackingSizeId)
+                </div>                
+            </div>                                 
+            <div class="clear"> </div>
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="Quantity"> Quantity </label>
+                </div>
+                <div class="editor-field">
+                    @Html.KendoInputFor(model => model.Quantity, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_min = "0",
+                       @data_bind = "value:detail.Quantity",
+                       @disabled = "disabled"
+                   })
+                    @Html.ValidationMessageFor(model => model.Quantity)
+                </div> 
+            </div>             
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="Rate"> Rate </label>
+                </div>
+                <div class="editor-field">                    
+                        @Html.KendoInputFor(model => model.Rate, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_min = "0",
+                       @data_bind = "value:detail.Rate, events: {change: CalculateTaxableAmt}"
+                   })                    
+                    @Html.ValidationMessageFor(model => model.Rate)
+                </div>
+            </div>     
+            <div class="clear"></div>      
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="TaxId"> Tax Type </label>
+                </div>
+                <div class="editor-field">
+                    @Html.KendoInputFor(model => model.TaxId, new
+                   {
+                       @id = "TaxCombo",
+                       @style = "width:180px; height:25px;",
+                       @data_role = "combobox",
+                       @placeholder = "Select...",
+                       @data_bind = "source:TaxdataSource, comboboxValue: detail.TaxId, comboboxText: detail.TaxName, events: {change: CalculateTax}",
+                       @data_value_field = "ID",
+                       @data_text_field = "Value",
+                       @data_auto_bind = "false"
+
+                   })
+                    @Html.ValidationMessageFor(model => model.TaxId)
+                </div>
+            </div>           
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="TaxableAmount"> Taxable Amount </label>
+                </div>
+                <div class="editor-field">
+                    @Html.KendoInputFor(model => model.TaxableAmount, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_min = "0",
+                       @data_bind = "value:detail.TaxableAmount",
+                       @disabled = "disabled"
+                   })
+                    @Html.ValidationMessageFor(model => model.TaxableAmount)
+                </div>
+            </div>                     
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="SGSTAmount"> SGST Amount </label>
+                </div>
+                <div class="editor-field">                   
+                        @Html.KendoInputFor(model => model.SGSTAmount, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_bind = "value:detail.SGSTAmount",
+                       @disabled = "disabled",
+                       @data_min = "0"
+                   })                   
+                    @Html.ValidationMessageFor(model => model.SGSTAmount)
+                </div>
+            </div>
+           
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="CGSTAmount"> CGST Amount </label>
+                </div>
+                <div class="editor-field">                  
+                        @Html.KendoInputFor(model => model.CGSTAmount, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_bind = "value:detail.CGSTAmount",
+                       @disabled = "disabled",
+                       @data_min = "0"
+                   })                   
+                    @Html.ValidationMessageFor(model => model.CGSTAmount)
+                </div>
+            </div>           
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="IGSTAmount"> IGST Amount </label>
+                </div>
+                <div class="editor-field">                   
+                        @Html.KendoInputFor(model => model.IGSTAmount, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_bind = "value:detail.IGSTAmount",
+                       @disabled = "disabled",
+                       @data_min = "0"
+                   })                  
+                    @Html.ValidationMessageFor(model => model.IGSTAmount)
+                </div>
+            </div>           
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="TaxAmount"> Tax Amount </label>
+                </div>
+                <div class="editor-field">                   
+                    @Html.KendoInputFor(model => model.TaxAmount, new
+                   {
+                       @data_role = "numerictextbox",
+                       @data_min = "0",
+                       @data_bind = "value:detail.TaxAmount",
+                       @disabled = "disabled"
+                   })                                    
+                    @Html.ValidationMessageFor(model => model.TaxAmount)
+                </div>
+            </div>            
+            <div class="separator">
+                <div class="editor-label">
+                    <label for="TotalAmount"> Total Amount </label>
+                </div>
+                <div class="editor-field">                   
+                        @Html.KendoInputFor(model => model.TotalAmount, new
+                   {                       
+                       @data_role = "numerictextbox",
+                       @data_min = "0",
+                       @data_bind = "value:detail.TotalAmount",
+                       @disabled = "disabled"
+                   })                  
+                    @Html.ValidationMessageFor(model => model.TotalAmount)
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div>
+                <p class="pInput">
+                    @*<a class="k-button k-button-icontext" id="btnSave" tabindex="22" data-bind="click: saveDetail"><span class="k-icon k-update"></span>Update</a>*@
+                    <input type="button" value="Add New" id="btnSave" tabindex="22" class="k-button submitbtn" data-bind="click:NewsaveDetail" />
+                    <input type="button" value="Update" id="btnSave" tabindex="23" class="k-button submitbtn" data-bind="click:saveDetail" />
+                    <input type="button" value="Cancel" id="btnSave" tabindex="24" class="k-button submitbtn" data-bind="click:cancelDetail" />
+
+                    @*<a class="k-button k-button-icontext" id="btnCancel" tabindex="23" data-bind="click: cancelDetail"><span class="k-icon k-cancel"></span>Cancel</a>*@
+                </p>
+                </div>
+            </form> 
+    </script>
+</div>
+<style>
+.editor-labels {
+        width: 120px;
+        display: inline-block;
+        padding-bottom: 0.5em;
+        margin-left:250px;
+    }
+
+
+</style>

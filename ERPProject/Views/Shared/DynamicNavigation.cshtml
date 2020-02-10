@@ -1,0 +1,55 @@
+﻿@using ERPProject.Infrastructure;
+
+@using ERPProject.ViewModels;
+@{
+    ViewBag.title = "DynamicNavigation";
+}
+@{
+    List<ERPProject.Areas.UserManagement.Models.MenuItems> myMenu = Dynamic_Menu.GetParentMenus(((CustomPrincipal)HttpContext.Current.User).UserId);
+}
+
+@{
+    if (myMenu != null && myMenu.Count > 0)
+    {
+        <div id="   Nav">
+            <ul id="menu">
+                @foreach (var item in myMenu)
+                {
+                    var submenu = Dynamic_Menu.GetSubMenu(((CustomPrincipal)HttpContext.Current.User).UserId, item.Id);                    
+                    
+                    <li>                 
+                        
+                         <a href="#a">@item.MenuItemName</a>
+                        <ul>
+                            @foreach (var items in submenu)
+                            {
+                                <li>
+                                    @if (items.Url == null)
+                                    {
+                                        <a href="#a">@items.MenuItemName</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Content(items.Url)">@items.MenuItemName</a>
+                                    }
+                                    
+
+                                </li>
+                            }
+
+                        </ul>
+                        
+                    </li>
+                }
+
+            </ul>
+
+
+        </div>
+    }
+}
+<script>
+  $(document).ready(function () {
+    $("#menu").kendoMenu();
+})</script>
+

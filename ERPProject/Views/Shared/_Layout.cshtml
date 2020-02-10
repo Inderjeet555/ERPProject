@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SuppleTek Industries Private Limited</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.default.mobile.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.common.min.css.map")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2019.1.115/kendo.blueopal.min.css")" rel="stylesheet" type="text/css" />
+
+    @*Javascript files*@
+    <script src="@Url.Content("~/Scripts/kendo/2019.1.115/jquery.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Kendo/2019.1.115/kendo.web.min.js")" type="text/javascript"></script>@*new file*@
+    <script src="@Url.Content("~/Scripts/Kendo/2019.1.115/kendo.aspnetmvc.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Kendo/2019.1.115/cultures/kendo.culture.en-IN.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2019.1.115/kendo.all.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/KendoCustomBindings.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/App.js")"type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.fileDownload.js")" type="text/javascript"></script>  
+
+    @* @*New File*@
+
+    <script type="text/javascript">
+        var _rootUrl = "@Url.Content("~")"
+
+    </script>
+
+</head>
+<body>
+    <script id="noDataTemplate" type="text/x-kendo-tmpl">
+        <div>
+            No data found. Do you want to add new Account - '#: instance.text() #' ?
+        </div>
+        <br />
+        <button class="k-button" onclick="addNew('#: instance.element[0].id #', '#: instance.text() #')">Add New</button>
+    </script>  
+
+    <div class="page" , style="height:100%">
+        <div id="header">
+            <div class="HeaderDiv">
+                <div class="logo">ERP Project</div>
+                <div class="loginbar">
+                    Welcome @User.Identity.Name, Today is @(DateTime.Now.ToString("D")) @Html.ActionLink("Change Password", "ChangePassword", "Account", new { area = "" }, new { @style = "text-decoration:none;color: #666666" }) | 
+                    <span class="pointer"> @Html.ActionLink("LogOut", "LogOff", "Account", new { area = "" }, null)</span></div>
+            </div>           
+            @if(User.Identity.Name == "inder")
+            {
+                @Html.Partial("DynamicNavigation")
+            }
+        </div>
+    </div>
+    <div id="pageContent">
+        @RenderBody()  
+    </div>
+    <div class="clear"></div>
+</body>
+
+</html>

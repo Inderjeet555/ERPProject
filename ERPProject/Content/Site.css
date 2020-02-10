@@ -1,0 +1,410 @@
+﻿body {
+    font-size: 12px;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    color: #000000;
+    /*overflow: hidden;*/
+}
+
+html,body{
+    margin: 0;
+    padding: 0;
+    color: #000000;
+}
+
+.page{
+    margin: 0;
+    padding: 0;
+}
+
+
+.loginbar{
+    padding:4px;
+    text-align:right;
+    padding-right:10px;
+    font:8pt verdana;
+    color: #666666;
+    font-weight:bold;
+    
+
+}
+.pointer {
+    cursor: pointer;
+}
+
+#Nav{
+    margin-bottom:5px;
+    height:30px;
+    font-weight:bold;
+}
+
+ul li{
+    font-weight:bold;
+}
+
+div.logo {
+    background-image: url("../Images/chart-icon.png");
+    background-position: 6px 4px;
+    background-repeat: no-repeat;
+    color: #666666;
+    font: bold 11pt verdana;
+    padding-left: 36px;
+    float: left;
+}
+
+.title {
+    color: #94C0D2;
+}
+
+#header {
+    position: absolute;
+    height: 30px;
+    width: 100%;
+}
+.HeaderDiv{
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#pageContent {
+    /*overflow: scroll;*/
+    position: absolute;
+    /*height: 91.5%;*/
+    width: 100%;
+    top: 67px;
+}
+.pageTitle {
+    color: black;
+    float: left;
+    font-family: verdana;
+    font-size: 18px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    font-weight:bold;
+    /*text-decoration: underline;*/
+}
+
+.pagebtn{
+    float:right;    
+    font-weight:bold;
+    margin-top:-15px;
+    margin-right:10px;
+   
+}
+
+.innerMain {
+    padding: 10px;
+}
+
+* {
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    transition: opacity 1s;
+}
+
+.containbar {
+    width: 100%;
+}
+
+.innerMain {
+    padding: 10px;
+
+}
+/*Parent div in View*/
+.pageHeader {
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.sub-title {
+    text-decoration: underline;
+}
+
+.clear {
+    clear: both;
+}
+
+.border, .borderstyle {
+    float: left;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5em;
+    position: relative;
+}
+
+.borderstyle, .radius {
+    border-radius: 8px 8px 8px 8px;
+}
+
+.hrline {
+    padding-bottom: 1px;
+    padding-top: 1px;
+}
+
+    .hrline hr {
+        color: #CCCCCC;
+    }
+
+.clear {
+    clear: both;
+}
+
+.btndiv {
+    padding-top: 10px;
+}
+
+.column {
+    float: left;
+    height: auto;
+    width: 33%;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.autocolumn {
+    float: left;
+    height: auto;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.separator {
+    float: left;
+    height: auto;
+    width: 50%;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.row {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: left;
+    height: auto;
+    width: 100%;
+}
+
+.row .btn {
+        float: right;
+    }
+
+.autosize {
+    width: 85%;
+}
+
+.autosizemax {
+    width: 97%;
+}
+
+.ItemField {
+    float: left;
+    margin: 2px 0;
+    padding: 0 10px;
+    width: 60%;
+}
+
+.labelField {
+    float: left;
+    height: auto;
+    margin: 2px 0 0 20px;
+    padding-right: 0.5%;
+    text-align: left;
+    width: 25%;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    display: block;
+    position: relative;
+}
+
+.portlet-header {
+    background: #F0F0F0;
+    border-bottom: 1px solid #CCCCCC;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #444444;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 6px 0;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
+    .portlet-header h4 {
+        color: #263849;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: bold;
+        margin: 0;
+        padding: 0 0 0 10px;
+        float: left;
+    }
+
+.portlet-content {
+    padding: 15px 15px 15px;
+    position: relative;
+}
+
+/* Validation Error */
+.ui-state-error-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-image: url('Images/tiperror.png');
+}
+
+.k-grid .ralign, .k-numerictextbox .k-input {
+    text-align: right;
+}
+
+.k-numerictextbox .k-input {
+    padding-right: 20px;
+}
+
+.getMaster {
+    cursor: pointer;
+}
+
+.DateRange {
+    padding-bottom: 5px;
+}
+
+.sidebar {
+    padding: 2px;
+}
+
+.autoeditor-label {
+    text-align: right;
+    font-weight: bold;
+    float: left;
+}
+
+.autoeditor-field {
+    float: left;
+}
+
+.editor-label {
+    /* padding-right: 3%;*/
+    text-align: left;
+    width: 25%;
+    font-weight: bold;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.editor-label50 {
+    padding-right: 6%;
+    text-align: right;
+    width: 15%;
+    font-weight: bold;
+}
+
+.editor-field50 {
+    width: 80%;
+}
+
+.editor-label, .editor-label50, .editor-field50, .editor-field, .autoeditor-field {
+    display: inline-block;
+    padding-bottom: 0.5em;
+}
+
+.editor-field {
+    width: 65%;
+}
+
+.find {
+    float: right;
+    width: 100%;
+    border-bottom: solid 1px #28415a;
+}
+
+    .find .findfrm {
+        float: right;
+        width: 340px;
+        font-weight: bold;
+    }
+
+        .find .findfrm .searchbtn {
+            background-image: url("kendo/2012.2.831/BlueOpal/sprite.png");
+            background-position: -29px -237px;
+            border-color: #94C0D2;
+            background-color: #DAECF4;
+            padding: 0 7px 6px 10px;
+            border-radius: 4px 4px 4px 4px;
+        }
+
+.Hide {
+    display: none;
+}
+
+.Show {
+    display: inline;
+}
+
+.icon-printer {
+    background-image: url('Images/printer.png') !important;
+    border-color: transparent;
+}
+
+.icon-pdf {
+    background-image: url('Images/pdf.png') !important;
+    border-color: transparent;
+}
+
+.icon-excel {
+    background-image: url('Images/excel.png') !important;
+    border-color: transparent;
+}
+
+.icon-report {
+    background-image: url('Images/Report.png') !important;
+    border-color: transparent;
+}
+
+#gritoolbar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    #gritoolbar a {
+        margin-right: 3px;
+    }
+
+.propcontainer {
+    width: 50%;
+    float: left;
+    padding-bottom: 10px;
+    /*padding-left: 5px;*/
+}
+
+.feildcontainer {
+    width: 50%;
+    float: left;
+}
+
+    .feildcontainer span {
+        font-weight: bold;
+    }
+
+.rule {
+    background: url("Images/rule.gif") repeat-x scroll 0 0 transparent;
+    padding-top: 5px;
+    clear: both;
+    margin: 0px 18px 0px;
+}
+
+.rule2 {
+    background: url("Images/rule2.gif") repeat-x scroll 0 0 transparent;
+    padding-top: 5px;
+    clear: both;
+}
+
+span.k-tooltip {
+    position: absolute !important;
+    z-index: 0;
+}
+
